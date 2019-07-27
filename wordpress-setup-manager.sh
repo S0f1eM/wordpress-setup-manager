@@ -66,10 +66,10 @@ bot "${blue}${bold}================== Hello ! ====================="
 bot "${blue}${bold} I am your assistant for your wordpress installation.${normal}"
 echo -e "         Ready to install you WordPress website for : ${cyan}$2${normal}"
 
-#Se positionne dans le dossier des sites web
+#Go to the installation directory
 cd $pathtoinstall
 
-# vérifie si le dossier existe déjà
+# check if the directory allready exist
 if [ -d $1 ]; then
   bot "${red}The folder ${cyan}$1${red}already exists${normal}."
   echo "         For safety's sake, I'm not going any further than that to avoid crushing anything."
@@ -79,7 +79,7 @@ if [ -d $1 ]; then
   exit 1
 fi
 
-# créer le répertoire
+# create the directory
 bot "${blue}${bold}Phase 1 -${normal} I create the folder: ${cyan}$1${normal}"
 mkdir $1
 cd $1
@@ -87,7 +87,7 @@ bot "${blue}${bold}Phase 1 -${normal} I create a folder cms to download wordpres
 mkdir cms
 cd cms
 
-# Télécharge WP
+# Download Wordpress
 bot "${blue}${bold}Phase 1 -${normal}I download ${cyan}${bold}WordPress${normal}..."
 wp core download   
 
@@ -95,11 +95,7 @@ wp core download
 bot "${blue}${bold}Phase 1 -${normal} I got the version: ${cyan}${bold}" 
 wp core version
 
-#renommer le répertoire /plugins en /extensions 
-#penser à modifier la constant PLUGINDIR vers le nouveau chemin
-#dans la phase 3 ?
-
-# create base configuration - wp-config.php file - dbuser -> A REMPLACER
+# create base configuration - wp-config.php file
 bot "${blue}${bold}Phase 1 -${normal} I launch the configuration and create the file ${cyan}wp-config.php:"
 wp core config --dbname="$2" --dbuser="" --dbpass="" --skip-check --extra-php 
 define( 'WP_DEBUG', true );
